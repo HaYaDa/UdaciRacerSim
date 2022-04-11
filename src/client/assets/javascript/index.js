@@ -120,7 +120,7 @@ function runRace(raceID) {
 			*/
 			} else if (race.status === 'finished') {
 				clearInterval(raceInfo);
-				resultsView(race.positions);
+				renderAt('#race', resultsView(race.positions));
 				resolve(race);
 			}
 		})
@@ -193,7 +193,7 @@ function handleSelectTrack(target) {
 async function handleAccelerate(target) {
 	console.log("accelerate button clicked")
 	// TODO - Invoke the API call to accelerate
-	await accelerate((store.race_id))
+	await accelerate(store.race_id)
 }
 
 // HTML VIEWS ------------------------------------------------
@@ -425,7 +425,7 @@ function accelerate(id) {
 	// POST request to `${SERVER}/api/races/${id}/accelerate`
 	// options parameter provided as defaultFetchOpts
 	// no body or datatype needed for this request
-	return fetch(`${SERVER}/api/races/${id}/start`, {
+	return fetch(`${SERVER}/api/races/${id}/accelerate`, {
 		method: 'POST',
 		...defaultFetchOpts(),
 		body: ''
